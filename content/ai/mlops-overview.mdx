@@ -1,0 +1,104 @@
+---
+title: "MLOps 완전 정복: AI 모델을 실제 서비스로 만드는 운영 기술"
+date: "2026-02-03"
+category: "ai"
+description: "MLOps의 개념과 ML 모델 개발부터 배포, 모니터링까지의 전체 라이프사이클, MLflow·Kubeflow·SageMaker 등 주요 도구를 종합 정리합니다."
+tags: ["MLOps", "MLflow", "Kubeflow", "모델배포", "AI운영"]
+author: "IT Trend 편집팀"
+---
+
+## MLOps란?
+
+MLOps(Machine Learning Operations)는 **머신러닝 모델의 개발(Dev)과 운영(Ops)을 통합**하여 ML 시스템을 안정적으로 배포하고 유지관리하는 방법론입니다. 소프트웨어의 DevOps를 ML 분야에 적용한 것입니다.
+
+<Callout type="info">
+  **현실**: 연구실에서 높은 정확도를 보이는 ML 모델이 실제 서비스에 적용했을 때 성능이 저하되는 경우가 많습니다. MLOps는 이 간극을 해소합니다.
+</Callout>
+
+## ML 라이프사이클과 MLOps
+
+<ComparisonTable
+  headers={["단계", "활동", "주요 도구"]}
+  rows={[
+    ["데이터 준비", "수집, 전처리, 버전 관리", "DVC, Delta Lake, Great Expectations"],
+    ["모델 개발", "실험, 학습, 하이퍼파라미터 튜닝", "MLflow, W&B, Optuna"],
+    ["모델 평가", "성능 검증, A/B 테스트", "Evidently AI, Seldon"],
+    ["모델 배포", "컨테이너화, API 서빙", "BentoML, Triton, KServe"],
+    ["모니터링", "드리프트 감지, 재학습 트리거", "Grafana, Prometheus, Arize"],
+    ["거버넌스", "모델 레지스트리, 규정 준수", "MLflow Registry, Amazon SageMaker"],
+  ]}
+/>
+
+## 핵심 MLOps 개념
+
+### 1. 데이터 버전 관리 (Data Versioning)
+
+코드의 Git처럼, 데이터도 버전 관리가 필요합니다.
+
+```bash
+# DVC (Data Version Control) 사용 예시
+dvc init
+dvc add data/training_data.csv   # 대용량 데이터를 Git에 추가하지 않고 추적
+git add data/training_data.csv.dvc .gitignore
+git commit -m "Add training dataset v1.2"
+
+# 원격 스토리지에 저장
+dvc push  # S3, GCS 등에 업로드
+```
+
+### 2. 피처 스토어 (Feature Store)
+
+ML 피처를 중앙에서 관리하여 재사용성을 높입니다.
+
+```python
+# Feast (오픈소스 피처 스토어) 예시
+from feast import FeatureStore
+
+store = FeatureStore(repo_path=".")
+
+# 온라인 추론용 피처 조회 (저지연)
+features = store.get_online_features(
+    features=["user_stats:purchase_count", "user_stats:avg_order_value"],
+    entity_rows=[{"user_id": 1001}]
+)
+```
+
+### 3. 모델 드리프트 모니터링
+
+실제 서비스 데이터가 학습 데이터와 달라지는 현상을 감지합니다.
+
+<ComparisonTable
+  headers={["드리프트 유형", "설명", "예시"]}
+  rows={[
+    ["데이터 드리프트", "입력 데이터 분포 변화", "코로나로 쇼핑 패턴 급변"],
+    ["개념 드리프트", "입력-출력 관계 변화", "주가 예측 모델 성능 저하"],
+    ["레이블 드리프트", "출력 분포 변화", "스팸 메일 패턴 변화"],
+    ["예측 드리프트", "모델 예측값 분포 변화", "추천 시스템 편향 심화"],
+  ]}
+/>
+
+## 주요 MLOps 플랫폼
+
+<ComparisonTable
+  headers={["플랫폼", "특징", "적합한 환경"]}
+  rows={[
+    ["MLflow", "오픈소스, 실험 추적 특화", "소규모 팀, 유연한 환경"],
+    ["Kubeflow", "Kubernetes 기반 ML 플랫폼", "대규모 Kubernetes 환경"],
+    ["SageMaker", "AWS 완전 관리형 서비스", "AWS 사용 기업"],
+    ["Vertex AI", "Google Cloud ML 플랫폼", "GCP 사용 기업"],
+    ["Azure ML", "Microsoft ML 서비스", "Azure/Microsoft 365 환경"],
+  ]}
+/>
+
+## LLMOps: LLM 시대의 MLOps
+
+2026년에는 대형 언어 모델 운영을 위한 **LLMOps**가 별도 분야로 발전했습니다.
+
+- **프롬프트 버전 관리**: 프롬프트 변경 이력 추적
+- **RAG 파이프라인 관리**: 벡터 DB + LLM 통합 운영
+- **평가 자동화**: LLM 응답 품질 자동 평가 (LLM-as-Judge)
+- **비용 모니터링**: API 호출 비용 추적 및 최적화
+
+<Callout type="tip">
+  **MLOps 시작 가이드**: MLflow부터 시작하세요. pip install mlflow 한 줄로 설치하고, 실험 추적부터 모델 레지스트리까지 무료로 사용할 수 있습니다.
+</Callout>

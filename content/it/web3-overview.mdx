@@ -1,0 +1,96 @@
+---
+title: "Web3란 무엇인가? 탈중앙화 인터넷의 핵심 개념 완벽 정리"
+date: "2026-02-19"
+category: "it"
+description: "블록체인 기반의 Web3 기술이 기존 Web2와 어떻게 다른지, 핵심 구성 요소인 스마트 컨트랙트, DeFi, NFT, DAO의 개념과 특징을 상세히 설명합니다."
+tags: ["Web3", "블록체인", "DeFi", "NFT", "DAO"]
+author: "IT Trend 편집팀"
+featured: true
+---
+
+## Web3란 무엇인가?
+
+Web3는 블록체인 기술을 기반으로 한 **탈중앙화된 차세대 인터넷**의 개념입니다. 기존 Web2가 구글, 메타 같은 중앙 플랫폼 기업들이 데이터를 소유하는 구조라면, Web3는 사용자가 자신의 데이터와 디지털 자산을 직접 통제합니다.
+
+<Callout type="info">
+  **인터넷의 진화**: Web1(읽기 전용, 1990년대) → Web2(읽기/쓰기, 2000년대) → Web3(읽기/쓰기/소유, 현재)
+</Callout>
+
+## Web2와 Web3의 핵심 차이
+
+<ComparisonTable
+  headers={["항목", "Web2", "Web3"]}
+  rows={[
+    ["데이터 소유권", "플랫폼 기업 소유", "사용자 직접 소유"],
+    ["신뢰 주체", "중앙화된 서버/기업", "스마트 컨트랙트 코드"],
+    ["계정 관리", "이메일/비밀번호", "개인키/지갑 주소"],
+    ["수익 분배", "플랫폼이 대부분 가져감", "토큰으로 사용자에게 분배"],
+    ["검열 가능성", "플랫폼이 언제든 차단 가능", "누구도 차단 불가"],
+    ["대표 서비스", "유튜브, 페이스북, 트위터", "Uniswap, OpenSea, ENS"],
+  ]}
+/>
+
+## Web3의 핵심 구성 요소
+
+### 1. 스마트 컨트랙트 (Smart Contract)
+
+중개자 없이 코드로 자동 실행되는 계약입니다. 이더리움 블록체인 위에서 동작하며, 조건이 충족되면 자동으로 실행됩니다.
+
+```solidity
+// 간단한 스마트 컨트랙트 예시 (Solidity)
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleVoting {
+    mapping(string => uint256) public votes;
+
+    function vote(string memory candidate) public {
+        votes[candidate]++;
+    }
+
+    function getVotes(string memory candidate) public view returns (uint256) {
+        return votes[candidate];
+    }
+}
+```
+
+### 2. 탈중앙화 금융 (DeFi)
+
+은행이나 증권사 없이 금융 서비스를 이용할 수 있는 생태계입니다.
+
+<ComparisonTable
+  headers={["항목", "전통 금융", "DeFi"]}
+  rows={[
+    ["중앙 기관", "은행, 증권사", "스마트 컨트랙트"],
+    ["운영 시간", "영업 시간 내", "24/7 365일"],
+    ["접근성", "계좌 개설 필요", "지갑 주소만 있으면 가능"],
+    ["투명성", "내부 장부 비공개", "온체인 모든 거래 공개"],
+    ["수익 구조", "이자율 낮음", "유동성 공급으로 높은 수익 가능"],
+  ]}
+/>
+
+### 3. NFT (Non-Fungible Token)
+
+고유한 디지털 자산을 증명하는 토큰입니다. 디지털 아트, 게임 아이템, 음악 등 다양한 분야에 활용됩니다.
+
+- **대체 불가능**: 같은 NFT는 세상에 하나뿐
+- **소유권 증명**: 블록체인에 소유 이력이 투명하게 기록
+- **프로그래머블**: 2차 판매 시 원작자 로열티 자동 지급 가능
+
+### 4. DAO (Decentralized Autonomous Organization)
+
+스마트 컨트랙트로 운영되는 탈중앙화 자율 조직입니다. 토큰 보유자들이 투표로 의사결정을 합니다.
+
+<Callout type="tip">
+  **실제 사례**: Uniswap DAO는 UNI 토큰 보유자들이 프로토콜 업그레이드, 수수료 정책, 자금 배분 등을 투표로 결정합니다.
+</Callout>
+
+## Web3의 현재와 미래
+
+Web3는 아직 초기 단계이며 다음과 같은 과제가 있습니다:
+
+- **확장성**: 이더리움 메인넷은 초당 15개 거래 처리 (비자는 초당 24,000개)
+- **사용성**: 일반 사용자에게는 지갑 관리가 복잡함
+- **규제**: 각국 정부의 암호화폐/Web3 규제 불확실성
+
+그러나 Layer 2 솔루션(Arbitrum, Optimism)과 계정 추상화(Account Abstraction) 기술이 발전하면서 이런 문제들이 점차 해결되고 있습니다.
